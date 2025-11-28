@@ -53,6 +53,23 @@ def _recursive_scan_dir(current_path, indent_prefix, current_tree_list):
         prefix = CORNER_ITEM if is_last else PIPE_ITEM
         next_indent = SPACE if is_last else PIPE_SPACE
 
+        full_path = os.path.join(current_path, item)
+
+        if is_dir:
+            current_tree_list.append(
+                f'{indent_prefix}{prefix}{FOLDER_ICON}{item}{os.sep}'
+                )
+            
+            _recursive_scan_dir(
+                full_path,
+                indent_prefix + next_indent,
+                current_tree_list
+                )
+        else:
+            current_tree_list.append(f'{indent_prefix}{prefix}{FILE_ICON}{item}')
+
+    return
+
 
 # ----------------------------------------------------------------------
 # 3. メインのデータ生成関数
@@ -113,9 +130,9 @@ def write_trees_to_excel(folder_data, output_filepath=f'Project_Tree_Report_{tod
                 sheet_name = 'ルート' if not sheet_name else sheet_name[:31]
 
                 df = pd.DataFrame(tree_lines, columns=['Path'])
-                df.to_excel(writer, sheet_name = folder_name, index= False)
+                df.to_excel(writer, sheet_name = sheet_name, index= False)
                 try:
-                    worksheet = writer.sheets[folder_name]
+                    worksheet = writer.sheets[sheet_name]
                     worksheet.set_column(0, 0, 100)
                 except Exception:
                     pass
