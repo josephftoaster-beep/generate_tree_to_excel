@@ -85,6 +85,7 @@ def generate_visual_tree_recursive(startpath):
                                 dir_lines)
         folder_dictionary[sheet_key] = dir_lines
 
+    return folder_dictionary
 
 # ----------------------------------------------------------------------
 # 4. Excelファイル作成
