@@ -1,3 +1,5 @@
+
+
 def _recursive_scan_dir(current_path, indent_prefix, current_tree_list):
     current_dir_file_list = os.listdir(current_path)
 
