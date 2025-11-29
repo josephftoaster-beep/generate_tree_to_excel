@@ -1,3 +1,11 @@
+import pandas as pd
+import re
+from datetime import datetime
+
+# ★修正1：必要な定数をここで定義する★
+DATE = datetime.today()
+today = DATE.strftime('%Y%m%d')
+
 def write_trees_to_excel(folder_data, output_filepath=f'Project_Tree_Report_{today}.xlsx'):
     """
     フォルダ名:ツリーリストの辞書を受け取り、各フォルダ名をシート名としてExcelに書き出す関数。
