@@ -1,5 +1,6 @@
-from tree_scanner import _recursive_scan_dir
 import os
+
+from tree_scanner import _recursive_scan_dir
 
 def generate_visual_tree_recursive(startpath):
     try:
