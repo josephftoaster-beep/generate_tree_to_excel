@@ -1,5 +1,12 @@
 import os
 
+SPACE = '    '
+PIPE_SPACE = '│' + SPACE
+PIPE_ITEM = '├── '
+CORNER_ITEM = '└── '
+FILE_ICON = '📄'
+FOLDER_ICON = '📂'
+
 from tree_scanner import _recursive_scan_dir
 
 def generate_visual_tree_recursive(startpath):
