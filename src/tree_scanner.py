@@ -1,5 +1,12 @@
 import os
 
+SPACE = '    '
+PIPE_SPACE = '│' + SPACE
+PIPE_ITEM = '├── '
+CORNER_ITEM = '└── '
+FILE_ICON = '📄'
+FOLDER_ICON = '📂'
+
 def _recursive_scan_dir(current_path, indent_prefix, current_tree_list):
     current_dir_file_list = os.listdir(current_path)
 
