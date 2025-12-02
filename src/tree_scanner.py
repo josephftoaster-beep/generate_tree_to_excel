@@ -28,16 +28,24 @@ def _recursive_scan_dir(current_path, indent_prefix, current_tree_list):
     files.sort()
     #ツリー描画の慣習に従い、フォルダを先、ファイルを後の順序で結合する。
     all_children = dirs + files
-    #
+    
     for i, item in enumerate(all_children):
+        #itemがフォルダに該当する場合、Trueを返す。
+        #Trueの場合、ICONの判別と、次の階層への再帰呼び出しを行う際にの分岐に利用する。
         is_dir = item in dirs
+        #インデックスとリスト内の最後の要素のインデックスが等しければTrueを返す。
+        #prefixおよびnext_indentの変数がis_lastによって変わる。
         is_last = (i == len(all_children) -1)
         
+        #is_last(TrueまたはFalse)に基づいて、接続文字と次のインデントを決定する。
+        #最後の要素(True)の場合、prefixは’└──’(CORNER_ITEM)となり、
+        #next_indentは縦線を切断する SPACE が格納される。 
         prefix = CORNER_ITEM if is_last else PIPE_ITEM
         next_indent = SPACE if is_last else PIPE_SPACE
-
+        #再帰呼び出し（サブフォルダへの移動）の引数として利用するため、フルパスを格納する。
         full_path = os.path.join(current_path, item)
 
+        
         if is_dir:
             current_tree_list.append(
                 f'{indent_prefix}{prefix}{FOLDER_ICON}{item}{os.sep}'
