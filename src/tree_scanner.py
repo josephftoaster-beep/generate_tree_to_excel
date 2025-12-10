@@ -47,16 +47,20 @@ def _recursive_scan_dir(current_path, indent_prefix, current_tree_list):
 
         
         if is_dir:
+            #is_dirがTrueのとき、current_tree_listにツリー描画(フォルダ)を追加する。
             current_tree_list.append(
                 f'{indent_prefix}{prefix}{FOLDER_ICON}{item}{os.sep}'
                 )
-            
+            #再帰呼び出しを行い、階層を一つ深く潜る。
+            #※次のindent_prefix(next_indent)を引数に渡すことで、再帰的なインデントを実現する。
             _recursive_scan_dir(
                 full_path,
                 indent_prefix + next_indent,
                 current_tree_list
                 )
         else:
+            #is_dirがFalseの場合、current_tree_listにツリー描画(ファイル)を追加する。
             current_tree_list.append(f'{indent_prefix}{prefix}{FILE_ICON}{item}')
-
+    #すべての要素の処理と再帰呼び出しが完了したため、
+    #呼び出し元(一つ上の階層)に制御を戻す。(再帰処理の巻き戻し)
     return
